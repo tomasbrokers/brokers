@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Estate Listings</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-content">
+        <div class="logo">
+          <img src="Logo.png" alt="Tomas Brokers" class="logo-img">
+        </div>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Propiedades</a></li>
+          <li><a href="#">Sobre Nosotros</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+          ☰
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-overlay"></div>
+    <div class="container">
+      <div class="header-content">
+        <h1>Propiedades Premium en Zona Norte</h1>
+        <p>Compra-Venta y Alquileres, en las zonas más exclusivas de Pilar.</p>
+        <a href="https://wa.me/5491134155152" class="contact-btn" target="_blank">¡Contactanos!</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/5491134155152" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+
+  <!-- Properties Section with Sorting -->
+  <section class="properties-section">
+    <div class="container">
+      <div class="properties-header">
+        <h2 class="section-title">Propiedades en Venta:</h2>
+        <div class="sort-controls">
+          <span class="sort-label">Ordenar por</span>
+          <div class="sort-dropdown">
+            <button class="sort-button" onclick="toggleSortOptions()">
+              <span id="currentSort">Más relevantes</span> ▼
+            </button>
+            <div class="sort-options" id="sortOptions">
+              <button onclick="sortProperties('relevant')">Más relevantes</button>
+              <button onclick="sortProperties('low')">Menor precio</button>
+              <button onclick="sortProperties('high')">Mayor precio</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="properties-grid" id="propertiesContainer">
+        <!-- Properties will be loaded here by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Simplified Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contacto</h3>
+          <p>📞 +54 9 11 3415-5152</p>
+          <p>✉️ tomasnisi@yahoo.com</p>
+          <p>🏢 Piso 2 Oficina 208<br>Pueblo Caamaño, Pilar,<br>Buenos Aires, Argentina</p>
+        </div>
+        
+        <div class="footer-logo-container">
+          <img src="Logo.png" alt="Tomas Brokers" class="footer-logo">
+        </div>
+        
+        <div class="footer-section services-section">
+          <h3>Servicios</h3>
+          <p>• Compra y Venta de Propiedades</p>
+          <p>• Alquileres</p>
+          <p>• Tasaciones</p>
+          <p>• Asesoramiento Inmobiliario</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Tomas Brokers. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
