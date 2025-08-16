@@ -1,7 +1,64 @@
 function toggleMenu() {
   const navLinks = document.getElementById("navLinks");
   navLinks.classList.toggle("active");
+  
+  // Prevent body scroll when menu is open on mobile
+  if (navLinks.classList.contains("active")) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
 }
+
+// Smooth scrolling for anchor links
+function smoothScrollTo(targetId) {
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    window.scrollTo({
+      top: targetElement.offsetTop,
+      behavior: 'smooth'
+    });
+  }
+}
+
+// Handle anchor links
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click event listeners to all anchor links
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Get the target ID from href
+      const targetId = this.getAttribute('href').substring(1);
+      if (targetId) {
+        e.preventDefault();
+        smoothScrollTo(targetId);
+      }
+    });
+  });
+  
+  // Add click event listeners to all nav links
+  const navLinksItems = document.querySelectorAll(".nav-links li a");
+  navLinksItems.forEach(link => {
+    link.addEventListener('click', () => {
+      // Close the menu after clicking a link
+      document.getElementById("navLinks").classList.remove("active");
+      document.body.style.overflow = "";
+    });
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const navLinks = document.getElementById("navLinks");
+    const hamburger = document.querySelector('.hamburger');
+    
+    if (navLinks && navLinks.classList.contains("active") && 
+        !navLinks.contains(event.target) && 
+        !hamburger.contains(event.target)) {
+      navLinks.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+});
 
 // Property data
 const properties = [
@@ -42,10 +99,8 @@ const properties = [
     url: "property4.html"
   }
 ];
-
 // Current sort order
 let currentSort = 'relevant';
-
 // Render properties
 function renderProperties(propertyArray) {
   const container = document.getElementById('propertiesContainer');
@@ -71,7 +126,6 @@ function renderProperties(propertyArray) {
     container.appendChild(propertyElement);
   });
 }
-
 // Sort properties
 function sortProperties(sortType) {
   currentSort = sortType;
@@ -102,7 +156,6 @@ function sortProperties(sortType) {
     toggleSortOptions(); // Close dropdown after selection
   }
 }
-
 // Update sort text (new function for the separated label/button)
 function updateSortText(text) {
   const sortText = document.getElementById('currentSort');
@@ -110,7 +163,6 @@ function updateSortText(text) {
     sortText.textContent = text;
   }
 }
-
 // Toggle sort options dropdown
 function toggleSortOptions() {
   const sortOptions = document.getElementById('sortOptions');
@@ -118,7 +170,6 @@ function toggleSortOptions() {
     sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
   }
 }
-
 // Close sort options when clicking outside
 document.addEventListener('click', function(event) {
   const sortContainer = document.querySelector('.sort-dropdown'); // Updated selector
@@ -128,7 +179,6 @@ document.addEventListener('click', function(event) {
     sortOptions.style.display = 'none';
   }
 });
-
 // Mobile Slider Functionality
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize properties on page load with default sorting (relevant)
