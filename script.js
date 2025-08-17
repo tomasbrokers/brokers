@@ -9,7 +9,6 @@ function toggleMenu() {
     document.body.style.overflow = "";
   }
 }
-
 // Smooth scrolling for anchor links
 function smoothScrollTo(targetId) {
   const targetElement = document.getElementById(targetId);
@@ -20,7 +19,6 @@ function smoothScrollTo(targetId) {
     });
   }
 }
-
 // Handle anchor links
 document.addEventListener('DOMContentLoaded', function() {
   // Add click event listeners to all anchor links
@@ -59,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-
 // Property data
 const properties = [
   {
@@ -99,8 +96,21 @@ const properties = [
     url: "property4.html"
   }
 ];
+// NEW: Rental property data
+const rentalProperties = [
+  {
+    id: 5,
+    title: "Duplex Tres Ambientes en Caamaño Up",
+    price: 500,
+    specs: "3 Ambientes · 45 m² · 1 Cochera Incluida",
+    description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar. Disponible para alquiler a precio competitivo.",
+    image: "3.jpg",
+    url: "property5.html"
+  }
+];
 // Current sort order
 let currentSort = 'relevant';
+let currentRentalSort = 'relevant';
 // Render properties
 function renderProperties(propertyArray) {
   const container = document.getElementById('propertiesContainer');
@@ -125,6 +135,46 @@ function renderProperties(propertyArray) {
     
     container.appendChild(propertyElement);
   });
+}
+// NEW: Render rental properties
+function renderRentalProperties() {
+  const container = document.getElementById('rentalPropertiesContainer');
+  if (!container) return;
+  
+  container.innerHTML = '';
+  
+  // First render the actual rental property
+  rentalProperties.forEach(property => {
+    const propertyElement = document.createElement('a');
+    propertyElement.href = property.url;
+    propertyElement.className = 'property-link';
+    
+    propertyElement.innerHTML = `
+      <div class="property-card">
+        <img src="${property.image}" alt="${property.title}" />
+        <h2>${property.title}</h2>
+        <p class="title">$${property.price.toLocaleString()} por mes</p>
+        <p class="specs">${property.specs}</p>
+        <p class="description">${property.description}</p>
+      </div>
+    `;
+    
+    container.appendChild(propertyElement);
+  });
+  
+  // Then add 3 placeholder cards
+  for (let i = 0; i < 3; i++) {
+    const placeholderElement = document.createElement('div');
+    placeholderElement.className = 'placeholder-card';
+    
+    placeholderElement.innerHTML = `
+      <div class="placeholder-icon">🏠</div>
+      <h2>Proximamente</h2>
+      <p>Nuevas propiedades en alquiler</p>
+    `;
+    
+    container.appendChild(placeholderElement);
+  }
 }
 // Sort properties
 function sortProperties(sortType) {
@@ -156,9 +206,46 @@ function sortProperties(sortType) {
     toggleSortOptions(); // Close dropdown after selection
   }
 }
+// NEW: Sort rental properties
+function sortRentalProperties(sortType) {
+  currentRentalSort = sortType;
+  let sortedProperties = [...rentalProperties];
+  
+  switch(sortType) {
+    case 'low':
+      sortedProperties.sort((a, b) => a.price - b.price);
+      updateSortTextRental('Menor precio');
+      break;
+    case 'high':
+      sortedProperties.sort((a, b) => b.price - a.price);
+      updateSortTextRental('Mayor precio');
+      break;
+    case 'relevant':
+    default:
+      // Keep original order (by ID)
+      sortedProperties.sort((a, b) => a.id - b.id);
+      updateSortTextRental('Más relevantes');
+      break;
+  }
+  
+  renderRentalProperties(sortedProperties);
+  
+  // Only close dropdown if it was already open (user made a selection)
+  const sortOptions = document.getElementById('sortOptionsRental');
+  if (sortOptions && sortOptions.style.display === 'block') {
+    toggleSortOptionsRental(); // Close dropdown after selection
+  }
+}
 // Update sort text (new function for the separated label/button)
 function updateSortText(text) {
   const sortText = document.getElementById('currentSort');
+  if (sortText) {
+    sortText.textContent = text;
+  }
+}
+// NEW: Update sort text for rental properties
+function updateSortTextRental(text) {
+  const sortText = document.getElementById('currentSortRental');
   if (sortText) {
     sortText.textContent = text;
   }
@@ -170,13 +257,29 @@ function toggleSortOptions() {
     sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
   }
 }
+// NEW: Toggle sort options dropdown for rental properties
+function toggleSortOptionsRental() {
+  const sortOptions = document.getElementById('sortOptionsRental');
+  if (sortOptions) {
+    sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
+  }
+}
 // Close sort options when clicking outside
 document.addEventListener('click', function(event) {
-  const sortContainer = document.querySelector('.sort-dropdown'); // Updated selector
+  // For sale properties
+  const sortContainer = document.querySelector('.sort-dropdown');
   const sortOptions = document.getElementById('sortOptions');
   
   if (sortContainer && sortOptions && !sortContainer.contains(event.target)) {
     sortOptions.style.display = 'none';
+  }
+  
+  // For rental properties
+  const sortContainerRental = document.querySelector('#propiedades-alquiler .sort-dropdown');
+  const sortOptionsRental = document.getElementById('sortOptionsRental');
+  
+  if (sortContainerRental && sortOptionsRental && !sortContainerRental.contains(event.target)) {
+    sortOptionsRental.style.display = 'none';
   }
 });
 // Mobile Slider Functionality
@@ -187,6 +290,10 @@ document.addEventListener('DOMContentLoaded', function() {
   sortedProperties.sort((a, b) => a.id - b.id); // Sort by relevance (ID order)
   renderProperties(sortedProperties);
   updateSortText('Más relevantes'); // Set button text to default
+  
+  // NEW: Initialize rental properties on page load
+  renderRentalProperties();
+  updateSortTextRental('Más relevantes'); // Set button text to default
   
   const sliderTrack = document.getElementById('sliderTrack');
   const prevBtn = document.getElementById('prevBtn');
