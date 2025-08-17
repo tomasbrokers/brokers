@@ -21,6 +21,14 @@ function smoothScrollTo(targetId) {
 }
 // Handle anchor links
 document.addEventListener('DOMContentLoaded', function() {
+  // Check if there's a hash in the URL and scroll to that element
+  if (window.location.hash) {
+    const targetId = window.location.hash.substring(1);
+    setTimeout(() => {
+      smoothScrollTo(targetId);
+    }, 100);
+  }
+  
   // Add click event listeners to all anchor links
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
   anchorLinks.forEach(link => {
@@ -162,18 +170,22 @@ function renderRentalProperties() {
     container.appendChild(propertyElement);
   });
   
-  // Then add 3 placeholder cards
-  for (let i = 0; i < 3; i++) {
-    const placeholderElement = document.createElement('div');
-    placeholderElement.className = 'placeholder-card';
-    
-    placeholderElement.innerHTML = `
-      <div class="placeholder-icon">🏠</div>
-      <h2>Proximamente</h2>
-      <p>Nuevas propiedades en alquiler</p>
-    `;
-    
-    container.appendChild(placeholderElement);
+  // Only add placeholder cards on desktop (not mobile)
+  // Check if window width is greater than 768px (desktop view)
+  if (window.innerWidth > 768) {
+    // Add 3 placeholder cards
+    for (let i = 0; i < 3; i++) {
+      const placeholderElement = document.createElement('div');
+      placeholderElement.className = 'placeholder-card';
+      
+      placeholderElement.innerHTML = `
+        <div class="placeholder-icon">🏠</div>
+        <h2>Proximamente</h2>
+        <p>Nuevas propiedades en alquiler</p>
+      `;
+      
+      container.appendChild(placeholderElement);
+    }
   }
 }
 // Sort properties
@@ -425,4 +437,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Optional: Auto-play (uncomment if desired)
   // setInterval(nextImage, 4000);
+});
+// Handle window resize to re-render rental properties if needed
+window.addEventListener('resize', function() {
+  renderRentalProperties();
 });
