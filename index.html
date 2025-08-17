@@ -89,6 +89,61 @@
       </div>
     </div>
   </section>
+  
+  <!-- Rental Properties Section with Sorting -->
+  <section class="properties-section" id="propiedades-alquiler">
+    <div class="container">
+      <div class="properties-header">
+        <h2 class="section-title">Propiedades en Alquiler:</h2>
+        <div class="sort-controls">
+          <span class="sort-label"></span>
+          <div class="sort-dropdown">
+            <button class="sort-button" onclick="toggleSortOptionsRental()">
+              <span id="currentSortRental">Más relevantes</span> ▼
+            </button>
+            <div class="sort-options" id="sortOptionsRental">
+              <button onclick="sortRentalProperties('relevant')">Más relevantes</button>
+              <button onclick="sortRentalProperties('low')">Menor precio</button>
+              <button onclick="sortRentalProperties('high')">Mayor precio</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="properties-grid" id="rentalPropertiesContainer">
+        <!-- Rental properties will be loaded here by JavaScript -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- Office Section -->
+  <section class="office-section">
+    <div class="container">
+      <div class="office-grid">
+        <div class="office-text-cards">
+          <div class="text-card property-card">
+            <h2>Experiencia</h2>
+            <p class="description">Más de 20 años en el mercado inmobiliario.</p>
+          </div>
+          <div class="text-card property-card">
+            <h2>Confianza</h2>
+            <p class="description">Cientos de clientes satisfechos nos respaldan.</p>
+          </div>
+          <div class="text-card property-card">
+            <h2>Profesionalismo</h2>
+            <p class="description">Asesoramiento personalizado y transparente.</p>
+          </div>
+          <div class="text-card property-card">
+            <h2>Ubicación</h2>
+            <p class="description">Oficina en Pilar, corazón de Zona Norte.</p>
+          </div>
+        </div>
+        <div class="office-image-container">
+          <img src="office.jpg" alt="Nuestra Oficina">
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- Simplified Footer -->
   <footer class="footer">
     <div class="container">
