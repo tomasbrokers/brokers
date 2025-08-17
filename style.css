@@ -144,6 +144,7 @@ body {
    =========================================== */
 .properties-section {
   padding: 30px 0 10px 0;
+  margin-bottom: 40px; /* Add space between sections */
 }
 .properties-header {
   display: flex;
@@ -221,9 +222,25 @@ body {
 /* Properties Grid */
 .properties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr); /* Fixed 4 columns for consistency */
   gap: 15px;
   align-items: stretch;
+}
+/* Responsive adjustments for the grid */
+@media (max-width: 1200px) {
+  .properties-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .properties-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .properties-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .property-card {
   background-color: #fff;
@@ -275,6 +292,33 @@ body {
   flex-direction: column;
   height: 100%;
 }
+/* NEW: Placeholder card styles */
+.placeholder-card {
+  background-color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.placeholder-card .placeholder-icon {
+  font-size: 40px;
+  color: #999;
+  margin-bottom: 15px;
+}
+.placeholder-card h2 {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
+.placeholder-card p {
+  font-size: 14px;
+  color: #888;
+}
 /* ===========================================
    PROPERTY DETAILS PAGE
    =========================================== */
@@ -284,7 +328,7 @@ body {
 .property-details .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 0%;
+  padding: 0; /* Set to 0 for desktop */
 }
 .property-details h1 {
   font-size: 32px;
@@ -501,6 +545,13 @@ body {
     height: 140px;
     padding: 40px 0;
   }
+  
+  /* Office section gradient background for desktop */
+  .office-section {
+    background: linear-gradient(to bottom, #f9f9f9, #f9f9f9);
+    border-radius: 10px;
+    padding: 40px 0;
+  }
 }
 /* ===========================================
    MOBILE STYLES
@@ -531,6 +582,16 @@ body {
   
   .container {
     padding: 0 5%;
+  }
+  
+  /* Add this rule for property details container on mobile only */
+  .property-details .container {
+    padding: 0 5%; /* Only apply padding on mobile */
+  }
+  
+  /* Add space between sections for mobile */
+  .properties-section {
+    margin-bottom: 30px; /* Adjust space for mobile */
   }
   
   .properties-header {
@@ -652,4 +713,60 @@ body {
   .footer-content {
     gap: 15px;
   }
+  
+  /* Mobile office section styles */
+  .office-grid {
+    flex-direction: column;
+  }
+
+  .office-text-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .text-card {
+    width: 100%;
+  }
+
+  .office-image-container {
+    aspect-ratio: auto;
+    height: 300px;
+    margin-top: 15px;
+  }
+}
+
+/* ===========================================
+   OFFICE SECTION
+   =========================================== */
+.office-section {
+  padding: 30px 0;
+}
+
+.office-grid {
+  display: flex;
+  gap: 15px;
+  align-items: stretch;
+}
+
+.office-text-cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.office-image-container {
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+
+.office-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
