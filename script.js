@@ -9,6 +9,7 @@ function toggleMenu() {
     document.body.style.overflow = "";
   }
 }
+
 // Smooth scrolling for anchor links
 function smoothScrollTo(targetId) {
   const targetElement = document.getElementById(targetId);
@@ -19,6 +20,7 @@ function smoothScrollTo(targetId) {
     });
   }
 }
+
 // Handle anchor links
 document.addEventListener('DOMContentLoaded', function() {
   // Check if there's a hash in the URL and scroll to that element
@@ -33,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
   anchorLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-      // Get the target ID from href
       const targetId = this.getAttribute('href').substring(1);
       if (targetId) {
         e.preventDefault();
@@ -46,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinksItems = document.querySelectorAll(".nav-links li a");
   navLinksItems.forEach(link => {
     link.addEventListener('click', () => {
-      // Close the menu after clicking a link
       document.getElementById("navLinks").classList.remove("active");
       document.body.style.overflow = "";
     });
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
 // Property data
 const properties = [
   {
@@ -104,6 +105,7 @@ const properties = [
     url: "property4.html"
   }
 ];
+
 // NEW: Rental property data
 const rentalProperties = [
   {
@@ -116,9 +118,11 @@ const rentalProperties = [
     url: "property5.html"
   }
 ];
+
 // Current sort order
 let currentSort = 'relevant';
 let currentRentalSort = 'relevant';
+
 // Render properties
 function renderProperties(propertyArray) {
   const container = document.getElementById('propertiesContainer');
@@ -135,7 +139,7 @@ function renderProperties(propertyArray) {
       <div class="property-card">
         <img src="${property.image}" alt="${property.title}" />
         <h2>${property.title}</h2>
-        <p class="title">USD ${property.price.toLocaleString()}</p>
+        <p class="title">USD ${property.price.toLocaleString('es-AR')}</p>
         <p class="specs">${property.specs}</p>
         <p class="description">${property.description}</p>
       </div>
@@ -144,6 +148,7 @@ function renderProperties(propertyArray) {
     container.appendChild(propertyElement);
   });
 }
+
 // NEW: Render rental properties
 function renderRentalProperties() {
   const container = document.getElementById('rentalPropertiesContainer');
@@ -151,7 +156,6 @@ function renderRentalProperties() {
   
   container.innerHTML = '';
   
-  // First render the actual rental property
   rentalProperties.forEach(property => {
     const propertyElement = document.createElement('a');
     propertyElement.href = property.url;
@@ -161,7 +165,7 @@ function renderRentalProperties() {
       <div class="property-card">
         <img src="${property.image}" alt="${property.title}" />
         <h2>${property.title}</h2>
-        <p class="title">$${property.price.toLocaleString()} por mes</p>
+        <p class="title">USD ${property.price.toLocaleString('es-AR')}</p>
         <p class="specs">${property.specs}</p>
         <p class="description">${property.description}</p>
       </div>
@@ -171,9 +175,7 @@ function renderRentalProperties() {
   });
   
   // Only add placeholder cards on desktop (not mobile)
-  // Check if window width is greater than 768px (desktop view)
   if (window.innerWidth > 768) {
-    // Add 3 placeholder cards
     for (let i = 0; i < 3; i++) {
       const placeholderElement = document.createElement('div');
       placeholderElement.className = 'placeholder-card';
@@ -188,6 +190,7 @@ function renderRentalProperties() {
     }
   }
 }
+
 // Sort properties
 function sortProperties(sortType) {
   currentSort = sortType;
@@ -204,7 +207,6 @@ function sortProperties(sortType) {
       break;
     case 'relevant':
     default:
-      // Keep original order (by ID)
       sortedProperties.sort((a, b) => a.id - b.id);
       updateSortText('Más relevantes');
       break;
@@ -212,12 +214,12 @@ function sortProperties(sortType) {
   
   renderProperties(sortedProperties);
   
-  // Only close dropdown if it was already open (user made a selection)
   const sortOptions = document.getElementById('sortOptions');
   if (sortOptions && sortOptions.style.display === 'block') {
-    toggleSortOptions(); // Close dropdown after selection
+    toggleSortOptions();
   }
 }
+
 // NEW: Sort rental properties
 function sortRentalProperties(sortType) {
   currentRentalSort = sortType;
@@ -234,7 +236,6 @@ function sortRentalProperties(sortType) {
       break;
     case 'relevant':
     default:
-      // Keep original order (by ID)
       sortedProperties.sort((a, b) => a.id - b.id);
       updateSortTextRental('Más relevantes');
       break;
@@ -242,19 +243,20 @@ function sortRentalProperties(sortType) {
   
   renderRentalProperties(sortedProperties);
   
-  // Only close dropdown if it was already open (user made a selection)
   const sortOptions = document.getElementById('sortOptionsRental');
   if (sortOptions && sortOptions.style.display === 'block') {
-    toggleSortOptionsRental(); // Close dropdown after selection
+    toggleSortOptionsRental();
   }
 }
-// Update sort text (new function for the separated label/button)
+
+// Update sort text
 function updateSortText(text) {
   const sortText = document.getElementById('currentSort');
   if (sortText) {
     sortText.textContent = text;
   }
 }
+
 // NEW: Update sort text for rental properties
 function updateSortTextRental(text) {
   const sortText = document.getElementById('currentSortRental');
@@ -262,6 +264,7 @@ function updateSortTextRental(text) {
     sortText.textContent = text;
   }
 }
+
 // Toggle sort options dropdown
 function toggleSortOptions() {
   const sortOptions = document.getElementById('sortOptions');
@@ -269,6 +272,7 @@ function toggleSortOptions() {
     sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
   }
 }
+
 // NEW: Toggle sort options dropdown for rental properties
 function toggleSortOptionsRental() {
   const sortOptions = document.getElementById('sortOptionsRental');
@@ -276,73 +280,62 @@ function toggleSortOptionsRental() {
     sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
   }
 }
+
 // Close sort options when clicking outside
 document.addEventListener('click', function(event) {
-  // For sale properties
   const sortContainer = document.querySelector('.sort-dropdown');
   const sortOptions = document.getElementById('sortOptions');
-  
   if (sortContainer && sortOptions && !sortContainer.contains(event.target)) {
     sortOptions.style.display = 'none';
   }
   
-  // For rental properties
   const sortContainerRental = document.querySelector('#propiedades-alquiler .sort-dropdown');
   const sortOptionsRental = document.getElementById('sortOptionsRental');
-  
   if (sortContainerRental && sortOptionsRental && !sortContainerRental.contains(event.target)) {
     sortOptionsRental.style.display = 'none';
   }
 });
+
 // Mobile Slider Functionality
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize properties on page load with default sorting (relevant)
-  // But don't open the dropdown menu
   let sortedProperties = [...properties];
-  sortedProperties.sort((a, b) => a.id - b.id); // Sort by relevance (ID order)
+  sortedProperties.sort((a, b) => a.id - b.id);
   renderProperties(sortedProperties);
-  updateSortText('Más relevantes'); // Set button text to default
+  updateSortText('Más relevantes');
   
-  // NEW: Initialize rental properties on page load
   renderRentalProperties();
-  updateSortTextRental('Más relevantes'); // Set button text to default
+  updateSortTextRental('Más relevantes');
   
   const sliderTrack = document.getElementById('sliderTrack');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const sliderCounter = document.getElementById('sliderCounter');
   
-  // Check if slider elements exist (only on property pages)
   if (!sliderTrack || !prevBtn || !nextBtn || !sliderCounter) return;
   
   const images = sliderTrack.querySelectorAll('.slider-image');
   let currentIndex = 0;
   const totalImages = images.length;
   
-  // Update slider position and counter
   function updateSlider() {
     const translateX = -currentIndex * 100;
     sliderTrack.style.transform = `translateX(${translateX}%)`;
     sliderCounter.textContent = `${currentIndex + 1}/${totalImages}`;
   }
   
-  // Next image
   function nextImage() {
     currentIndex = (currentIndex + 1) % totalImages;
     updateSlider();
   }
   
-  // Previous image
   function prevImage() {
     currentIndex = (currentIndex - 1 + totalImages) % totalImages;
     updateSlider();
   }
   
-  // Arrow button event listeners
   nextBtn.addEventListener('click', nextImage);
   prevBtn.addEventListener('click', prevImage);
   
-  // Touch/Swipe functionality
   let startX = 0;
   let startY = 0;
   let isScrolling = false;
@@ -361,13 +354,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const diffX = startX - currentX;
     const diffY = startY - currentY;
     
-    // Determine if user is scrolling vertically or swiping horizontally
     if (Math.abs(diffY) > Math.abs(diffX)) {
       isScrolling = true;
       return;
     }
     
-    // Prevent default only for horizontal swipes
     if (Math.abs(diffX) > 10 && !isScrolling) {
       e.preventDefault();
     }
@@ -383,13 +374,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const endX = e.changedTouches[0].clientX;
     const diffX = startX - endX;
     
-    // Minimum swipe distance
     if (Math.abs(diffX) > 50) {
       if (diffX > 0) {
-        // Swiped left - next image
         nextImage();
       } else {
-        // Swiped right - previous image
         prevImage();
       }
     }
@@ -398,7 +386,6 @@ document.addEventListener('DOMContentLoaded', function() {
     startY = 0;
   });
   
-  // Mouse drag functionality for desktop
   let isDragging = false;
   let dragStartX = 0;
   
@@ -432,12 +419,9 @@ document.addEventListener('DOMContentLoaded', function() {
     sliderTrack.style.cursor = 'grab';
   });
   
-  // Initialize slider
   updateSlider();
-  
-  // Optional: Auto-play (uncomment if desired)
-  // setInterval(nextImage, 4000);
 });
+
 // Handle window resize to re-render rental properties if needed
 window.addEventListener('resize', function() {
   renderRentalProperties();
