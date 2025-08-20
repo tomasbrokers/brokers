@@ -88,7 +88,7 @@ const properties = [
   },
   {
     id: 3,
-    title: "Duplex Tres Ambientes en Caamaño Up",
+    title: "Tres Ambientes en Caamaño Beach",
     price: 105000,
     specs: "3 Ambientes · 45 m² · 1 Cochera incluida",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar.",
@@ -97,7 +97,7 @@ const properties = [
   },
   {
     id: 4,
-    title: "Local Comercial a la Calle en Caamaño Up",
+    title: "Local a la Calle en Caamaño Beach",
     price: 120000,
     specs: "3 Ambientes · 80 m² · 1 Cochera incluida",
     description: "Local comercial, frente a la calle Blas Parera y Caamaño, muy bien ubicado y gran cantidad de tráfico durante la semana.",
@@ -110,7 +110,7 @@ const properties = [
 const rentalProperties = [
   {
     id: 5,
-    title: "Duplex Tres Ambientes en Caamaño Up",
+    title: "Tres Ambientes en Caamaño Beach",
     price: 500,
     specs: "3 Ambientes · 45 m² · 1 Cochera Incluida",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar. Disponible para alquiler a precio competitivo.",
