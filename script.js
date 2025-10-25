@@ -74,7 +74,7 @@ const properties = [
     price: 115000,
     specs: "1 Ambiente · 40 m² · 1 Cochera en subsuelo",
     description: "Lujoso departamento, ubicado en el centro del complejo, con las mejores vistas a la Calle Caamaño.",
-    image: "1.jpg",
+    image: "Imagenes/1.jpg",
     url: "property1.html"
   },
   {
@@ -83,25 +83,25 @@ const properties = [
     price: 145000,
     specs: "2 Ambientes · 70 m² · 1 Cochera en subsuelo",
     description: "Relajado, y espacioso departamento al lateral del complejo, muy luminoso y tranquilo. Excelente opción para familias.",
-    image: "2.jpg",
+    image: "Imagenes/2.jpg",
     url: "property2.html"
   },
   {
     id: 3,
-    title: "Tres Ambientes en Caamaño Beach",
+    title: "Tres Ambientes en Caamaño Up",
     price: 105000,
     specs: "3 Ambientes · 45 m² · 1 Cochera incluida",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar.",
-    image: "3.jpg",
+    image: "Imagenes/3.jpg",
     url: "property3.html"
   },
   {
     id: 4,
-    title: "Local a la Calle en Caamaño Beach",
+    title: "Local a la Calle en Caamaño Up",
     price: 120000,
     specs: "3 Ambientes · 80 m² · 1 Cochera incluida",
     description: "Local comercial, frente a la calle Blas Parera y Caamaño, muy bien ubicado y gran cantidad de tráfico durante la semana.",
-    image: "4.jpg",
+    image: "Imagenes/4.jpg",
     url: "property4.html"
   }
 ];
@@ -110,11 +110,11 @@ const properties = [
 const rentalProperties = [
   {
     id: 5,
-    title: "Tres Ambientes en Caamaño Beach",
+    title: "Tres Ambientes en Caamaño Up",
     price: 500,
     specs: "3 Ambientes · 45 m² · 1 Cochera Incluida",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar. Disponible para alquiler a precio competitivo.",
-    image: "3.jpg",
+    image: "Imagenes/3.jpg",
     url: "property5.html"
   }
 ];
