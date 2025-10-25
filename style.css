@@ -74,7 +74,7 @@ body {
    =========================================== */
 .header {
   position: relative;
-  background: #333 url('Background.jpeg') center/cover no-repeat;
+  background: #333 url('Imagenes/Background.jpg') center/cover no-repeat;
   color: white;
   text-align: center;
   padding: 200px 0;
