@@ -492,7 +492,6 @@ body.no-scroll {
   font-size: 24px;
   font-weight: 700;
   color: #0a1124;
-  letter-spacing: -0.2px;
   line-height: 1.25;
   flex: 1;
   margin-top: 26px;
@@ -512,10 +511,9 @@ body.no-scroll {
   margin-top: 4px;
 }
 .property-highlights {
-  font-size: 14px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 0;
+  color: #0b1427;
   margin: 0 0 8px;
 }
 .property-price-row {
@@ -523,17 +521,18 @@ body.no-scroll {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px 12px;
+  margin-top: 16px;
   margin-bottom: 12px;
   font-size: 14px;
   color: #1f2536;
   font-weight: 700;
 }
 .property-price-row span:first-child {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: rgba(31, 37, 54, 0.5);
+  color: 1f2536;
 }
 .property-price-row .property-price {
   font-size: 20px;
@@ -543,16 +542,18 @@ body.no-scroll {
 .property-price-row .property-expenses {
   flex-basis: 100%;
   margin-top: 4px;
+  margin-bottom: 36px;
   font-size: 20px;
-  color: rgba(89, 97, 114, 0.5);
+  font-weight: 700;
+  color: #0b1427;
   font-weight: 400;
 }
 .property-location {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
-  color: rgba(66, 74, 92, 0.5);
+  font-size: 16px;
+  color: 1f2536;
   margin-bottom: 16px;
 }
 .property-location__icon {
