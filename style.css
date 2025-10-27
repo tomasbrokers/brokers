@@ -50,7 +50,7 @@ body.no-scroll {
 .nav-links li a {
   text-decoration: none;
   color: #333;
-  font-weight: 700;
+  font-weight: 0;
   font-size: 14px;
   transition: opacity 0.3s ease;
   white-space: nowrap;
@@ -106,8 +106,8 @@ body.no-scroll {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 .header-content p {
-  font-size: 16px;
-  opacity: 0.5;
+  font-size: 18px;
+  opacity: 0.6;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 .contact-btn {
