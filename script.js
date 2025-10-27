@@ -1,12 +1,15 @@
 function toggleMenu() {
   const navLinks = document.getElementById("navLinks");
-  navLinks.classList.toggle("active");
-  
+  const toggleButton = document.querySelector(".hamburger");
+  if (!navLinks) return;
+
+  const isOpen = navLinks.classList.toggle("active");
+
   // Prevent body scroll when menu is open on mobile
-  if (navLinks.classList.contains("active")) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
+  document.body.classList.toggle("no-scroll", isOpen);
+
+  if (toggleButton) {
+    toggleButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
   }
 }
 
@@ -22,6 +25,115 @@ function smoothScrollTo(targetId) {
 }
 
 // Handle anchor links
+document.addEventListener('DOMContentLoaded', initPropertyGallery);
+
+function initPropertyGallery() {
+  const gallery = document.querySelector('.property-gallery');
+  const lightbox = document.querySelector('[data-gallery-modal]');
+  if (!gallery || !lightbox) return;
+
+  const imageList = (gallery.dataset.galleryImages || '')
+    .split(',')
+    .map(item => item.trim())
+    .filter(Boolean)
+    .slice(0, 16);
+
+  if (!imageList.length) {
+    return;
+  }
+
+  const altList = (gallery.dataset.galleryAlts || '')
+    .split('|')
+    .map(item => item.trim());
+  const galleryLabel = gallery.dataset.galleryLabel || 'Propiedad';
+
+  const lightboxImage = lightbox.querySelector('.gallery-lightbox__image');
+  const counter = lightbox.querySelector('.gallery-lightbox__counter');
+  const nextBtn = lightbox.querySelector('.gallery-lightbox__nav--next');
+  const prevBtn = lightbox.querySelector('.gallery-lightbox__nav--prev');
+  const closeBtn = lightbox.querySelector('.gallery-lightbox__close');
+
+  if (!lightboxImage || !counter || !nextBtn || !prevBtn || !closeBtn) {
+    return;
+  }
+
+  let currentIndex = 0;
+  let lastFocusedElement = null;
+
+  function updateLightbox(index) {
+    const total = imageList.length;
+    currentIndex = (index + total) % total;
+    const src = imageList[currentIndex];
+    const altText = altList[currentIndex] || `Foto ${currentIndex + 1}`;
+
+    lightboxImage.src = src;
+    lightboxImage.alt = `${altText} - ${galleryLabel}`;
+    counter.textContent = `${currentIndex + 1}/${total}`;
+  }
+
+  function openLightbox(index) {
+    lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    updateLightbox(index);
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+    document.addEventListener('keydown', handleKeyNavigation);
+    requestAnimationFrame(() => {
+      closeBtn.focus();
+    });
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+    document.removeEventListener('keydown', handleKeyNavigation);
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+  }
+
+  function showNext() {
+    updateLightbox(currentIndex + 1);
+  }
+
+  function showPrev() {
+    updateLightbox(currentIndex - 1);
+  }
+
+  function handleKeyNavigation(event) {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      showNext();
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      showPrev();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      closeLightbox();
+    }
+  }
+
+  nextBtn.addEventListener('click', showNext);
+  prevBtn.addEventListener('click', showPrev);
+  closeBtn.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', function(event) {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  const triggers = gallery.querySelectorAll('[data-gallery-index]');
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const index = parseInt(trigger.dataset.galleryIndex, 10);
+      openLightbox(Number.isNaN(index) ? 0 : index);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // Check if there's a hash in the URL and scroll to that element
   if (window.location.hash) {
@@ -48,7 +160,11 @@ document.addEventListener('DOMContentLoaded', function() {
   navLinksItems.forEach(link => {
     link.addEventListener('click', () => {
       document.getElementById("navLinks").classList.remove("active");
-      document.body.style.overflow = "";
+      document.body.classList.remove("no-scroll");
+      const toggleButton = document.querySelector(".hamburger");
+      if (toggleButton) {
+        toggleButton.setAttribute("aria-expanded", "false");
+      }
     });
   });
   
@@ -61,7 +177,10 @@ document.addEventListener('DOMContentLoaded', function() {
         !navLinks.contains(event.target) && 
         !hamburger.contains(event.target)) {
       navLinks.classList.remove("active");
-      document.body.style.overflow = "";
+      document.body.classList.remove("no-scroll");
+      if (hamburger) {
+        hamburger.setAttribute("aria-expanded", "false");
+      }
     }
   });
 });
@@ -72,36 +191,36 @@ const properties = [
     id: 1,
     title: "Monoambiente en Pueblo Caamaño",
     price: 115000,
-    specs: "1 Ambiente · 40 m² · 1 Cochera en subsuelo",
+    specs: "1 Ambiente · 40 m² · 1 Cochera",
     description: "Lujoso departamento, ubicado en el centro del complejo, con las mejores vistas a la Calle Caamaño.",
-    image: "Imagenes/1.jpg",
+    image: "Imagenes/PC1_1.jpg",
     url: "property1.html"
   },
   {
     id: 2,
     title: "Dos Ambientes en Pueblo Caamaño",
     price: 145000,
-    specs: "2 Ambientes · 70 m² · 1 Cochera en subsuelo",
+    specs: "2 Ambientes · 70 m² · 1 Cochera",
     description: "Relajado, y espacioso departamento al lateral del complejo, muy luminoso y tranquilo. Excelente opción para familias.",
-    image: "Imagenes/2.jpg",
+    image: "Imagenes/PC2_1.jpg",
     url: "property2.html"
   },
   {
     id: 3,
-    title: "Tres Ambientes en Caamaño Up",
+    title: "Dos Ambientes en Caamaño Up",
     price: 105000,
-    specs: "3 Ambientes · 45 m² · 1 Cochera incluida",
+    specs: "2 Ambientes · 45 m² · 1 Cochera",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar.",
-    image: "Imagenes/3.jpg",
+    image: "Imagenes/CU2_2.jpg",
     url: "property3.html"
   },
   {
     id: 4,
-    title: "Local a la Calle en Caamaño Up",
+    title: "Tres Ambientes en Caamaño Up",
     price: 120000,
-    specs: "3 Ambientes · 80 m² · 1 Cochera incluida",
+    specs: "3 Ambientes · 80 m² · 1 Cochera",
     description: "Local comercial, frente a la calle Blas Parera y Caamaño, muy bien ubicado y gran cantidad de tráfico durante la semana.",
-    image: "Imagenes/4.jpg",
+    image: "Imagenes/CU2_3.jpg",
     url: "property4.html"
   }
 ];
@@ -110,11 +229,11 @@ const properties = [
 const rentalProperties = [
   {
     id: 5,
-    title: "Tres Ambientes en Caamaño Up",
+    title: "Dos Ambientes en Caamaño Up",
     price: 500,
-    specs: "3 Ambientes · 45 m² · 1 Cochera Incluida",
+    specs: "3 Ambientes · 45 m² · 1 Cochera",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar. Disponible para alquiler a precio competitivo.",
-    image: "Imagenes/3.jpg",
+    image: "Imagenes/CU2_2.jpg",
     url: "property5.html"
   }
 ];
@@ -137,11 +256,15 @@ function renderProperties(propertyArray) {
     
     propertyElement.innerHTML = `
       <div class="property-card">
-        <img src="${property.image}" alt="${property.title}" />
-        <h2>${property.title}</h2>
-        <p class="title">USD ${property.price.toLocaleString('es-AR')}</p>
-        <p class="specs">${property.specs}</p>
-        <p class="description">${property.description}</p>
+        <div class="property-card__image">
+          <img src="${property.image}" alt="${property.title}" loading="lazy" />
+        </div>
+        <div class="property-card__body">
+          <h2>${property.title}</h2>
+          <p class="title">USD ${property.price.toLocaleString('es-AR')}</p>
+          <p class="specs">${property.specs}</p>
+          <p class="description">${property.description}</p>
+        </div>
       </div>
     `;
     
@@ -163,11 +286,15 @@ function renderRentalProperties() {
     
     propertyElement.innerHTML = `
       <div class="property-card">
-        <img src="${property.image}" alt="${property.title}" />
-        <h2>${property.title}</h2>
-        <p class="title">USD ${property.price.toLocaleString('es-AR')}</p>
-        <p class="specs">${property.specs}</p>
-        <p class="description">${property.description}</p>
+        <div class="property-card__image">
+          <img src="${property.image}" alt="${property.title}" loading="lazy" />
+        </div>
+        <div class="property-card__body">
+          <h2>${property.title}</h2>
+          <p class="title">USD ${property.price.toLocaleString('es-AR')}</p>
+          <p class="specs">${property.specs}</p>
+          <p class="description">${property.description}</p>
+        </div>
       </div>
     `;
     
@@ -401,11 +528,11 @@ document.addEventListener('DOMContentLoaded', function() {
     e.preventDefault();
   });
   
-  document.addEventListener('mouseup', function(e) {
-    if (!isDragging) return;
-    
-    const dragEndX = e.clientX;
-    const diffX = dragStartX - dragEndX;
+document.addEventListener('mouseup', function(e) {
+  if (!isDragging) return;
+  
+  const dragEndX = e.clientX;
+  const diffX = dragStartX - dragEndX;
     
     if (Math.abs(diffX) > 50) {
       if (diffX > 0) {
