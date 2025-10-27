@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monoambiente en Pueblo Caamaño - Tomas Brokers</title>
+  <title>Nosotros - Tomas Brokers</title>
   
   <!-- Favicon -->
-  <link rel="icon" href="https://www.tomasbrokers.com/Favicon1.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="https://www.tomasbrokers.com/Favicon1.png" type="image/x-icon" />
+  <link rel="icon" href="Imagenes/Favicon1.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="Imagenes/Favicon1.png" type="image/x-icon" />
   
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,25 +17,27 @@
   <div class="container">
     <div class="navbar-content">
       <div class="logo">
-        <a href="index.html"><img src="Red.png" alt="Tomas Brokers" class="logo-img"></a>
+        <a href="index.html"><img src="Imagenes/Red.png" alt="Tomas Brokers" class="logo-img"></a>
       </div>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Inicio</a></li>
         <li><a href="index.html#propiedades">Comprar</a></li>
         <li><a href="index.html#propiedades-alquiler">Alquilar</a></li>
         <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="https://wa.me/5491134155152" target="_blank">WhatsApp</a></li>
+        <li><a href="https://wa.me/5491134155152" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
       </ul>
-      <div class="hamburger" onclick="toggleMenu()">
+      <button class="hamburger" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false" onclick="toggleMenu()">
         ☰
-      </div>
+      </button>
     </div>
   </div>
 </nav>
 
-    <!-- Office Section -->
+<main>
+  <!-- Office Section -->
   <section class="office-section">
     <div class="container">
+      <h1>Sobre Tomas Brokers</h1>
       <div class="office-grid">
         <div class="office-text-cards">
           <div class="text-card property-card">
@@ -56,11 +58,12 @@
           </div>
         </div>
         <div class="office-image-container">
-          <img src="Office.jpg" alt="Nuestra Oficina">
+          <img src="Imagenes/Office.jpg" alt="Nuestra Oficina">
         </div>
       </div>
     </div>
   </section>
+</main>
   
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/5491134155152" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
