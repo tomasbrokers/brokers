@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dúplex Tres Ambientes en Caamaño Up - Tomas Brokers</title>
   
   <!-- Favicon -->
-  <link rel="icon" href="https://www.tomasbrokers.com/Favicon1.png" type="image/x-icon" />
-  <link rel="shortcut icon" href="https://www.tomasbrokers.com/Favicon1.png" type="image/x-icon" />
+  <link rel="icon" href="https://www.tomasbrokers.com/Imagenes/CU2_2.jpg" type="image/x-icon" />
+  <link rel="shortcut icon" href="https://www.tomasbrokers.com/Imagenes/CU2_2.jpg" type="image/x-icon" />
   
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,18 +17,18 @@
   <div class="container">
     <div class="navbar-content">
       <div class="logo">
-        <a href="index.html"><img src="Red.png" alt="Tomas Brokers" class="logo-img"></a>
+        <a href="index.html"><img src="Imagenes/Red.png" alt="Tomas Brokers" class="logo-img"></a>
       </div>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Inicio</a></li>
         <li><a href="index.html#propiedades">Comprar</a></li>
         <li><a href="index.html#propiedades-alquiler">Alquilar</a></li>
         <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="https://wa.me/5491134155152" target="_blank">WhatsApp</a></li>
+        <li><a href="https://wa.me/5491134155152" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
       </ul>
-      <div class="hamburger" onclick="toggleMenu()">
+      <button class="hamburger" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false" onclick="toggleMenu()">
         ☰
-      </div>
+      </button>
     </div>
   </div>
 </nav>
@@ -36,62 +36,199 @@
   <!-- Property Details -->
   <section class="property-details">
     <div class="container">
-      <!-- Desktop Images (hidden on mobile) -->
-      <div class="desktop-only">
-        <div class="image-container">
-          <div class="pic-a" style="background-image: url('Im/t3.jpg');"></div>
-          <div class="right-column">
-            <div class="pic-b" style="background-image: url('Im/t2.jpg');"></div>
-            <div class="pic-c" style="background-image: url('Im/t3.jpg');"></div>
-            <div class="pic-d" style="background-image: url('Im/t4.jpg');"></div>
-            <div class="pic-e" style="background-image: url('Im/t2.jpg');"></div>
+      <div class="property-gallery desktop-only" data-gallery-label="Dúplex Tres Ambientes en Caamaño Up" data-gallery-images="Imagenes/CU2_1.jpg, Imagenes/CU2_2.jpg, Imagenes/CU2_3.jpg, Imagenes/CU2_4.jpg" data-gallery-alts="Fachada del complejo Caamaño Up|Living luminoso del dúplex|Cocina integrada del dúplex|Terraza privada con vistas">
+        <div class="gallery-layout">
+          <button type="button" class="gallery-item gallery-item--hero" data-gallery-index="0">
+            <img src="Imagenes/CU2_1.jpg" alt="Fachada del complejo Caamaño Up" />
+          </button>
+          <div class="gallery-thumbs">
+            <button type="button" class="gallery-item gallery-item--thumb" data-gallery-index="1">
+              <img src="Imagenes/CU2_2.jpg" alt="Living luminoso del dúplex" loading="lazy" />
+            </button>
+            <button type="button" class="gallery-item gallery-item--thumb gallery-item--top-right" data-gallery-index="2">
+              <img src="Imagenes/CU2_3.jpg" alt="Cocina integrada del dúplex" loading="lazy" />
+            </button>
+            <button type="button" class="gallery-item gallery-item--thumb gallery-item--bottom-left" data-gallery-index="3">
+              <img src="Imagenes/CU2_4.jpg" alt="Terraza privada con vistas" loading="lazy" />
+            </button>
+            <button type="button" class="gallery-item gallery-item--thumb gallery-item--bottom-right gallery-item--more" data-gallery-index="3">
+              <img src="Imagenes/CU2_4.jpg" alt="Terraza privada con vistas" loading="lazy" />
+              <span class="gallery-more-label">Ver todas las fotos</span>
+            </button>
           </div>
         </div>
       </div>
       
-      <!-- Mobile Slider (hidden on desktop) -->
       <div class="mobile-slider mobile-only">
         <div class="slider-container">
           <div class="slider-track" id="sliderTrack">
-            <img src="Im/t2.jpg" alt="Exterior" class="slider-image active" />
-            <img src="Im/t3.jpg" alt="Living Room" class="slider-image" />
-            <img src="Im/t4.jpg" alt="Kitchen" class="slider-image" />
+            <img src="Imagenes/CU2_1.jpg" alt="Fachada del complejo Caamaño Up" class="slider-image" />
+            <img src="Imagenes/CU2_2.jpg" alt="Living luminoso del dúplex" class="slider-image" loading="lazy" />
+            <img src="Imagenes/CU2_3.jpg" alt="Cocina integrada del dúplex" class="slider-image" loading="lazy" />
+            <img src="Imagenes/CU2_4.jpg" alt="Terraza privada con vistas" class="slider-image" loading="lazy" />
           </div>
-          <button class="slider-arrow left-arrow" id="prevBtn">‹</button>
-          <button class="slider-arrow right-arrow" id="nextBtn">›</button>
-          <div class="slider-counter" id="sliderCounter">1/3</div>
+          <button class="slider-arrow left-arrow" id="prevBtn" aria-label="Ver imagen anterior">‹</button>
+          <button class="slider-arrow right-arrow" id="nextBtn" aria-label="Ver imagen siguiente">›</button>
+          <div class="slider-counter" id="sliderCounter">1/4</div>
         </div>
       </div>
       
-      <!-- MOVED TITLE HERE -->
-      <h1>Dúplex Tres Ambientes en Caamaño Up</h1>
-      
-      <div class="property-info">
-        <p class="specs">3 Ambientes · 45 m² · USD 105.000 · 1 Cochera incluida</p>
-        <p class="description">
-          Ideal para jóvenes que buscan su primer departamento o para quienes desean algo cómodo en la mejor ubicación de Pilar. Este dúplex de tres ambientes ofrece un diseño moderno, espacios bien distribuidos, y acceso a todas las comodidades del complejo Caamaño Up.
-        </p>
+      <div class="property-content">
+        <div class="property-layout">
+          <div class="property-main">
+            <div class="property-details-card">
+              <p class="property-highlights">3 Ambientes · 45 m² · 1 Cochera</p>
+              <div class="property-price-row">
+                <span>Venta</span>
+                <span class="property-price">USD 105.000</span>
+                <span class="property-expenses">Expensas $ Consultar</span>
+              </div>
+              <div class="property-location">
+                <span class="property-location__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21s6-5 6-10a6 6 0 1 0-12 0c0 5 6 10 6 10z"></path>
+                    <circle cx="12" cy="11" r="2.5"></circle>
+                  </svg>
+                </span>
+                <span>Caamaño Up, Pilar, Buenos Aires</span>
+              </div>
+              <div class="property-map">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46663.65179418665!2d-58.870340380292!3d-34.42044528759973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc9d53bbf46e2b%3A0x303460b0f1c3272a!2sCaama%C3%B1oUP!5e0!3m2!1ses-419!2sar!4v1753136245229!5m2!1ses-419!2sar"
+                  loading="lazy"
+                  title="Ubicación de Caamaño Up"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+              <div class="property-facts" aria-label="Características destacadas">
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="3" width="6" height="18" rx="1.2"></rect>
+                      <path d="M12 5l-2-2m2 2l2-2"></path>
+                      <path d="M12 19l-2 2m2-2l2 2"></path>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">Edificio 3 niveles</span>
+                </div>
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="5" y="5" width="14" height="14" rx="2"></rect>
+                      <path d="M10 14l4-4"></path>
+                      <path d="M10 10h4v4"></path>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">45 m² cub.</span>
+                </div>
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="3.5" width="6" height="17" rx="1.2"></rect>
+                      <circle cx="13.5" cy="12" r="0.9" fill="currentColor" stroke="none"></circle>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">3 ambientes</span>
+                </div>
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 13h12v2a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-2z"></path>
+                      <path d="M9 13V9a2 2 0 0 1 4 0v2"></path>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">2 baños</span>
+                </div>
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14l-1-3a2 2 0 0 0-1.9-1.3H7.9A2 2 0 0 0 6 9l-1 3z"></path>
+                      <path d="M7.5 16h-1.5v1a1.5 1.5 0 0 0 3 0v-1zM16.5 16h-1.5v1a1.5 1.5 0 0 0 3 0v-1z"></path>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">1 cochera</span>
+                </div>
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 14v4h16v-4"></path>
+                      <path d="M4 11h16v3H4z"></path>
+                      <path d="M6 11V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">2 dormitorios</span>
+                </div>
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 3v5a2 2 0 0 1-2 2h8"></path>
+                      <path d="M8 10h8v4a4 4 0 0 1-4 4H9a2 2 0 0 1-2-2v-6z"></path>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">1 toilette</span>
+                </div>
+                <div class="property-fact">
+                  <span class="property-fact__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+                      <path d="M4 9h16"></path>
+                      <path d="M8 5V3"></path>
+                      <path d="M16 5V3"></path>
+                    </svg>
+                  </span>
+                  <span class="property-fact__label">A estrenar</span>
+                </div>
+              </div>
+              <h1 class="property-title">Dúplex Tres Ambientes en Caamaño Up</h1>
+              <p class="property-description">
+                Ideal para quienes buscan su primer departamento o desean un hogar cómodo en la mejor ubicación de Pilar. Este dúplex ofrece un diseño moderno, espacios bien distribuidos y acceso a todas las comodidades del complejo Caamaño Up.
+              </p>
+            </div>
+          </div>
+          <div class="property-sidebar">
+            <div class="property-sidebar-inner">
+              <aside class="property-contact" aria-labelledby="contacto-propiedad">
+                <h2 id="contacto-propiedad">Contacto directo</h2>
+                <p>Coordiná una visita o pedí más información sobre esta propiedad.</p>
+                <div class="contact-item">
+                  <span class="contact-label">Teléfono</span>
+                  <a class="contact-value" href="tel:+5491134155152">+54 9 11 3415-5152</a>
+                </div>
+                <a
+                  class="contact-btn contact-btn--primary"
+                  href="https://wa.me/5491134155152?text=Hola%2C%20vi%20esta%20propiedad%20en%20TomasBrokers%20y%20quiero%20que%20me%20contacten.%20Gracias."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Mandar mensaje
+                </a>
+              </aside>
+              <aside class="contact-brand" aria-label="Contacto Tomas Brokers">
+                <img src="Imagenes/Logo2.png" alt="Tomas Brokers" class="contact-brand__logo">
+                <div class="contact-brand__details">
+                  <span class="contact-brand__name">Tomas Brokers Propiedades</span>
+                  <a class="contact-brand__phone" href="tel:+5491134155152">+54 9 11 3415-5152</a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <!-- Google Maps Embed -->
-      <div class="map-container">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46663.65179418665!2d-58.870340380292!3d-34.42044528759973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bc9d53bbf46e2b%3A0x303460b0f1c3272a!2sCaama%C3%B1oUP!5e0!3m2!1ses-419!2sar!4v1753136245229!5m2!1ses-419!2sar"
-          width="100%"
-          height="400"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
+
     </div>
   </section>
-  
+
   <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/5491134155152" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+  <a href="https://wa.me/5491134155152" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
   </a>
+
+  <div class="gallery-lightbox" data-gallery-modal aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galería de imágenes de Dúplex Tres Ambientes en Caamaño Up">
+    <button type="button" class="gallery-lightbox__close" aria-label="Cerrar galería">&times;</button>
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--prev" aria-label="Ver foto anterior">‹</button>
+    <img src="" alt="" class="gallery-lightbox__image" />
+    <button type="button" class="gallery-lightbox__nav gallery-lightbox__nav--next" aria-label="Ver foto siguiente">›</button>
+    <div class="gallery-lightbox__counter">1/4</div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
