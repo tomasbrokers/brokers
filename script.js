@@ -190,8 +190,8 @@ const properties = [
   {
     id: 1,
     title: "Monoambiente en Pueblo Caamaño",
-    price: 115000,
-    specs: "1 Ambiente · 40 m² · 1 Cochera",
+    price: 110000,
+    specs: "1 Ambiente · 38 m² · 1 Cochera",
     description: "Lujoso departamento, ubicado en el centro del complejo, con las mejores vistas a la Calle Caamaño.",
     image: "Imagenes/PC1_1.jpg",
     url: "property1.html"
@@ -199,7 +199,7 @@ const properties = [
   {
     id: 2,
     title: "Dos Ambientes en Pueblo Caamaño",
-    price: 145000,
+    price: 140000,
     specs: "2 Ambientes · 70 m² · 1 Cochera",
     description: "Relajado, y espacioso departamento al lateral del complejo, muy luminoso y tranquilo. Excelente opción para familias.",
     image: "Imagenes/PC2_1.jpg",
@@ -208,8 +208,8 @@ const properties = [
   {
     id: 3,
     title: "Dos Ambientes en Caamaño Up",
-    price: 105000,
-    specs: "2 Ambientes · 45 m² · 1 Cochera",
+    price: 70000,
+    specs: "2 Ambientes · 42 m² · 1 Cochera",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar.",
     image: "Imagenes/CU2_2.jpg",
     url: "property3.html"
@@ -217,7 +217,7 @@ const properties = [
   {
     id: 4,
     title: "Tres Ambientes en Caamaño Up",
-    price: 120000,
+    price: 85000,
     specs: "3 Ambientes · 80 m² · 1 Cochera",
     description: "Local comercial, frente a la calle Blas Parera y Caamaño, muy bien ubicado y gran cantidad de tráfico durante la semana.",
     image: "Imagenes/CU2_3.jpg",
@@ -230,8 +230,8 @@ const rentalProperties = [
   {
     id: 5,
     title: "Dos Ambientes en Caamaño Up",
-    price: 500,
-    specs: "3 Ambientes · 45 m² · 1 Cochera",
+    price: 400,
+    specs: "2 Ambientes · 42 m² · 1 Cochera",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar. Disponible para alquiler a precio competitivo.",
     image: "Imagenes/CU2_2.jpg",
     url: "property5.html"
@@ -437,116 +437,90 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const sliderCounter = document.getElementById('sliderCounter');
-  
-  if (!sliderTrack || !prevBtn || !nextBtn || !sliderCounter) return;
-  
-  const images = sliderTrack.querySelectorAll('.slider-image');
+
+  if (!sliderTrack || !sliderCounter) return;
+
+  const slides = Array.from(sliderTrack.querySelectorAll('.slider-image'));
+  const totalImages = slides.length;
+  if (!totalImages) return;
+
   let currentIndex = 0;
-  const totalImages = images.length;
-  
-  function updateSlider() {
-    const translateX = -currentIndex * 100;
-    sliderTrack.style.transform = `translateX(${translateX}%)`;
-    sliderCounter.textContent = `${currentIndex + 1}/${totalImages}`;
+
+  function updateCounter(index) {
+    const safeIndex = Math.max(0, Math.min(totalImages - 1, index));
+    sliderCounter.textContent = `${safeIndex + 1}/${totalImages}`;
   }
-  
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % totalImages;
-    updateSlider();
+
+  function scrollToIndex(index, smooth = true) {
+    const targetIndex = ((index % totalImages) + totalImages) % totalImages;
+    currentIndex = targetIndex;
+    const trackWidth = sliderTrack.clientWidth;
+    if (trackWidth) {
+      sliderTrack.scrollTo({
+        left: trackWidth * targetIndex,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+    }
+    updateCounter(targetIndex);
   }
-  
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-    updateSlider();
+
+  updateCounter(currentIndex);
+  scrollToIndex(currentIndex, false);
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      scrollToIndex(currentIndex + 1);
+    });
   }
-  
-  nextBtn.addEventListener('click', nextImage);
-  prevBtn.addEventListener('click', prevImage);
-  
-  let startX = 0;
-  let startY = 0;
-  let isScrolling = false;
-  
-  sliderTrack.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    isScrolling = false;
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      scrollToIndex(currentIndex - 1);
+    });
+  }
+
+  function syncIndexFromScroll() {
+    const width = sliderTrack.clientWidth;
+    if (!width) return;
+    const newIndex = Math.round(sliderTrack.scrollLeft / width);
+    if (newIndex !== currentIndex) {
+      currentIndex = Math.max(0, Math.min(totalImages - 1, newIndex));
+      updateCounter(currentIndex);
+    }
+  }
+
+  let scrollTimeout;
+  sliderTrack.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+      window.clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = window.setTimeout(syncIndexFromScroll, 80);
   });
-  
-  sliderTrack.addEventListener('touchmove', function(e) {
-    if (!startX || !startY) return;
-    
-    const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-    const diffX = startX - currentX;
-    const diffY = startY - currentY;
-    
-    if (Math.abs(diffY) > Math.abs(diffX)) {
-      isScrolling = true;
-      return;
-    }
-    
-    if (Math.abs(diffX) > 10 && !isScrolling) {
-      e.preventDefault();
-    }
-  });
-  
-  sliderTrack.addEventListener('touchend', function(e) {
-    if (!startX || !startY || isScrolling) {
-      startX = 0;
-      startY = 0;
-      return;
-    }
-    
-    const endX = e.changedTouches[0].clientX;
-    const diffX = startX - endX;
-    
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0) {
-        nextImage();
-      } else {
-        prevImage();
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (!visible.length) return;
+
+      const observedIndex = slides.indexOf(visible[0].target);
+      if (observedIndex !== -1 && observedIndex !== currentIndex) {
+        currentIndex = observedIndex;
+        updateCounter(currentIndex);
       }
-    }
-    
-    startX = 0;
-    startY = 0;
+    }, {
+      root: sliderTrack,
+      threshold: 0.6
+    });
+
+    slides.forEach(slide => observer.observe(slide));
+  }
+
+  window.addEventListener('resize', () => {
+    scrollToIndex(currentIndex, false);
   });
-  
-  let isDragging = false;
-  let dragStartX = 0;
-  
-  sliderTrack.addEventListener('mousedown', function(e) {
-    isDragging = true;
-    dragStartX = e.clientX;
-    sliderTrack.style.cursor = 'grabbing';
-    e.preventDefault();
-  });
-  
-  document.addEventListener('mousemove', function(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-  });
-  
-document.addEventListener('mouseup', function(e) {
-  if (!isDragging) return;
-  
-  const dragEndX = e.clientX;
-  const diffX = dragStartX - dragEndX;
-    
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0) {
-        nextImage();
-      } else {
-        prevImage();
-      }
-    }
-    
-    isDragging = false;
-    sliderTrack.style.cursor = 'grab';
-  });
-  
-  updateSlider();
 });
 
 // Handle window resize to re-render rental properties if needed
