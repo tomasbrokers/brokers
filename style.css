@@ -691,7 +691,7 @@ body.no-scroll {
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 .contact-label {
   font-size: 14px;
