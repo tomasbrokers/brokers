@@ -684,6 +684,7 @@ body.no-scroll {
   color: rgba(241, 245, 255, 0.5);
   line-height: 1.6;
   font-size: 14px;
+  text-align: left;
 }
 .contact-item {
   display: flex;
@@ -723,11 +724,11 @@ body.no-scroll {
 }
 .contact-btn--primary {
   background-color: #25d366;
-  color: #0f2c16;
+  color: #ffffff;
 }
 .contact-btn--primary:hover {
   background-color: #1ebe54;
-  color: #0b230f;
+  color: #ffffff;
 }
 .map-container {
   margin: 60px auto 0;
