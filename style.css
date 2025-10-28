@@ -12,6 +12,9 @@ body {
   color: #111;
   line-height: 1.5;
 }
+body p {
+  text-align: justify;
+}
 body.no-scroll {
   overflow: hidden;
 }
@@ -109,6 +112,7 @@ body.no-scroll {
   font-size: 18px;
   opacity: 0.6;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 .contact-btn {
   margin-top: 30px;
@@ -299,7 +303,7 @@ body.no-scroll {
 }
 .property-card .specs {
   font-size: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: #000000;
   font-weight: 400;
   opacity: 0.5;
@@ -340,16 +344,17 @@ body.no-scroll {
 .placeholder-card .placeholder-icon {
   font-size: 28px;
   color: #999;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 .placeholder-card h2 {
   font-size: 16px;
   color: #666;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .placeholder-card p {
   font-size: 14px;
   color: #888;
+  text-align: center;
 }
 /* ===========================================
    PROPERTY DETAILS PAGE
@@ -502,6 +507,7 @@ body.no-scroll {
 .property-price {
   font-size: 20px;
   font-weight: 700;
+  margin-bottom: -8px;
   color: #0d1a30;
   letter-spacing: -0.01em;
 }
@@ -514,14 +520,14 @@ body.no-scroll {
   font-size: 16px;
   font-weight: 0;
   color: #0b1427;
-  margin: 0 0 8px;
+  margin: 0 0 16px;
 }
 .property-price-row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px 12px;
-  margin-top: 16px;
+  margin-top: 4px;
   margin-bottom: 12px;
   font-size: 14px;
   color: #1f2536;
@@ -542,7 +548,7 @@ body.no-scroll {
 .property-price-row .property-expenses {
   flex-basis: 100%;
   margin-top: 4px;
-  margin-bottom: 36px;
+  margin-bottom: 4px;
   font-size: 20px;
   font-weight: 700;
   color: #0b1427;
@@ -553,8 +559,14 @@ body.no-scroll {
   align-items: center;
   gap: 10px;
   font-size: 16px;
-  color: 1f2536;
+  color: #1f2536;
   margin-bottom: 16px;
+  text-decoration: none;
+}
+.property-location:hover,
+.property-location:focus {
+  color: #0b1427;
+  text-decoration: none;
 }
 .property-location__icon {
   width: 18px;
@@ -568,7 +580,7 @@ body.no-scroll {
   display: block;
 }
 .property-map {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #e6eaf4;
@@ -585,7 +597,7 @@ body.no-scroll {
   margin: 18px 0 0;
 }
 .property-facts {
-  margin-top: 18px;
+  margin-top: 16px;
   padding: 18px 0 6px;
   border-top: 1px solid #d9deeb;
   display: grid;
@@ -635,7 +647,7 @@ body.no-scroll {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 18px;
+  margin-top: 16px;
 }
 .contact-brand__logo {
   width: 60px;
@@ -664,7 +676,7 @@ body.no-scroll {
 .property-contact h2 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   color: #ffffff;
 }
 .property-contact p {
@@ -836,15 +848,15 @@ body.no-scroll {
 }
 .footer-section h3 {
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   color: #000000;
   text-align: center;
 }
 .footer-section p {
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   line-height: 1.5;
-  text-align: left;
+  text-align: justify;
   opacity: 0.5;
 }
 .footer-logo-container {
@@ -860,7 +872,7 @@ body.no-scroll {
   text-align: center;
 }
 .services-section p {
-  text-align: left;
+  text-align: justify;
 }
 .footer-bottom {
   border-top: 1px solid #555;
@@ -868,6 +880,9 @@ body.no-scroll {
   text-align: center;
   font-size: 12px;
   color: #aaa;
+}
+.footer-bottom p {
+  text-align: center;
 }
 /* ===========================================
    MOBILE SLIDER STYLES
@@ -878,6 +893,10 @@ body.no-scroll {
 .desktop-only {
   display: block;
 }
+:root {
+  --property-slider-height: clamp(240px, 70vw, 420px);
+}
+
 .mobile-slider {
   position: relative;
   width: 100vw;
@@ -891,20 +910,33 @@ body.no-scroll {
 .slider-container {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: var(--property-slider-height);
   overflow: hidden;
 }
 .slider-track {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform 0.3s ease;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  gap: 0;
+}
+.slider-track::-webkit-scrollbar {
+  display: none;
+}
+.slider-track {
+  scrollbar-width: none;
 }
 .slider-image {
-  min-width: 100%;
+  flex: 0 0 100%;
+  width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
+  object-fit: cover;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 .slider-arrow {
   position: absolute;
@@ -992,6 +1024,10 @@ body.no-scroll {
     padding: 0 5%;
   }
   
+  .property-details {
+    padding: 0 0 40px;
+  }
+  
   /* Add this rule for property details container on mobile only */
   .property-details .container {
     padding: 0 5%; /* Only apply padding on mobile */
@@ -1035,7 +1071,7 @@ body.no-scroll {
   .footer-logo-container {
     order: -1;
     grid-column: span 2;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   
   .footer-section {
@@ -1127,8 +1163,8 @@ body.no-scroll {
   }
 
   .property-facts {
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 14px 12px;
+    grid-template-columns: repeat(3, minmax(90px, 1fr));
+    gap: 16px 12px;
   }
 
   .property-fact__label {
@@ -1179,22 +1215,8 @@ body.no-scroll {
   }
   
   /* Mobile slider adjustments */
-  .slider-container {
-    height: 250px;
-  }
-  
-  .slider-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
-  
-  .left-arrow {
-    left: 10px;
-  }
-  
-  .right-arrow {
-    right: 10px;
+  .mobile-slider .slider-arrow {
+    display: none;
   }
   
   .slider-counter {
@@ -1249,7 +1271,7 @@ body.no-scroll {
   .office-image-container {
     aspect-ratio: auto;
     height: 300px;
-    margin-top: 15px;
+    margin-top: 16px;
   }
 }
 
