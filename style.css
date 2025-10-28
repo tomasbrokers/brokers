@@ -1010,6 +1010,7 @@ body.no-scroll {
     border-radius: 10px;
     width: calc(100% - 40px);
     z-index: 1000;
+    gap: 0;
   }
   
   .nav-links.active {
@@ -1023,6 +1024,20 @@ body.no-scroll {
   
   .container {
     padding: 0 5%;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links li + li {
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 14px 18px;
+    width: 100%;
   }
   
   .property-details {
