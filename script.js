@@ -208,19 +208,19 @@ const properties = [
   {
     id: 3,
     title: "Dos Ambientes en Caamaño Up",
-    price: 70000,
+    price: 80000,
     specs: "2 Ambientes · 42 m² · 1 Cochera",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar.",
-    image: "Imagenes/CU2_2.jpg",
+    image: "Imagenes/CU2.jpg",
     url: "property3.html"
   },
   {
     id: 4,
     title: "Tres Ambientes en Caamaño Up",
-    price: 85000,
+    price: 95000,
     specs: "3 Ambientes · 80 m² · 1 Cochera",
     description: "Local comercial, frente a la calle Blas Parera y Caamaño, muy bien ubicado y gran cantidad de tráfico durante la semana.",
-    image: "Imagenes/CU2_3.jpg",
+    image: "Imagenes/CU2_2.jpg",
     url: "property4.html"
   }
 ];
@@ -233,7 +233,7 @@ const rentalProperties = [
     price: 400,
     specs: "2 Ambientes · 42 m² · 1 Cochera",
     description: "Ideal para jóvenes que buscan su primer departamento, o para algo cómodo en la mejor ubicación de Pilar. Disponible para alquiler a precio competitivo.",
-    image: "Imagenes/CU2_2.jpg",
+    image: "Imagenes/CU2.jpg",
     url: "property5.html"
   }
 ];
